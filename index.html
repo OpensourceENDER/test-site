@@ -2,12 +2,38 @@
 <html>
   <head>
     <title>
-      Test Site
+      My Latest Upload:
     </title>
   </head>
   <body>
   <h1>
-    Test Site
+    \<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+ 
+<iframe class="latestVideoEmbed" vnum='0' cid="UC5sqAqIT11psUQkuIbq_P9A" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+
+
+<script>
+var reqURL = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://www.youtube.com/feeds/videos.xml?channel_id=");
+function loadVideo(iframe){
+    $.getJSON( reqURL + iframe.getAttribute('cid'),
+      function(data) {
+         var videoNumber = (iframe.getAttribute('vnum')?Number(iframe.getAttribute('vnum')):0);
+        console.log(videoNumber);
+         var link = data.items[videoNumber].link;
+         id = link.substr(link.indexOf("=") + 1);  
+         iframe.setAttribute("src","https://youtube.com/embed/"+id + "?controls=0&autoplay=1");
+      }
+   );
+}
+var iframes = document.getElementsByClassName('latestVideoEmbed');
+for (var i = 0, len = iframes.length; i < len; i++){
+       loadVideo(iframes[i]);
+}
+</script>
+<text>
+  Probably a video where i ran out of ideas.....
+</text>
   </h1>
   </body>
 </html>
